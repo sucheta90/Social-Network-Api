@@ -1,20 +1,26 @@
 const { Schema, model } = require("mongoose");
 const Thought = require("./Thought");
+
+// Email validation function
+var validateEmail = function (email) {
+  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return re.test(email);
+};
+
 // User Schema
 const userSchema = new Schema(
   {
     username: { type: String, required: true, unique: true },
     email: {
       type: String,
-      // validate: {
-      //     validator: function(v) {
-      //       return /\d{3}-\d{3}-\d{4}/.test(v);
-      //     },
-      //     message: props => `${props.value} is not a valid phone number!`
-      //   },
-      //   required: [true, 'User phone number required']
-      // }
-      required: [true, "Please enter your email addess"],
+      trim: true,
+      unique: true,
+      required: true,
+
+      match: [
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        "Please fill a valid email address",
+      ],
     },
     thoughts: [
       {
