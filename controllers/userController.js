@@ -1,7 +1,12 @@
 const { User, Thought } = require("../models");
 
 module.exports = {
-  getAllusers(req, res) {
+  async getAllusers(req, res) {
+    // try{
+    //   const user = await User.find
+    // }catch(err){
+
+    // }
     User.find()
       .then((users) => res.json(users))
       .catch((err) => {
@@ -42,5 +47,46 @@ module.exports = {
       .then(() =>
         res.json({ message: "User and associated thoughts are deleted" })
       );
+  },
+
+  // Add friend
+  async addFriend(req, res) {
+    try {
+      const user = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        {
+          $addToSet: { friends: req.params.friendId },
+        },
+        { runValidators: true, new: true }
+      );
+      if (!user) {
+        return res.status(404).json({ message: "No user found with that id" });
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  // Remove friend
+  async removeFriend(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { friends: req.params.friendId } },
+        { runValidators: true, new: true }
+      );
+
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: "No user found with that ID :(" });
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
   },
 };
