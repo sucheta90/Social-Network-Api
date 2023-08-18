@@ -9,6 +9,11 @@ const thoughtSchema = new Schema(
       default: Date.now,
     },
     username: { type: String, required: true },
+    // added userId based on canvas/ bootcamp example
+    // userId: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "friend",
+    // },
     reactions: [Reaction],
   },
   {
