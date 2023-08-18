@@ -7,7 +7,8 @@ In this era of social media, where interactions and connections with people occu
 ## Table of Contents (Optional)
 
 - [Installation](#installation)
-- [Usage](#usage)
+- [Features](#features)
+- [Credits](#credits)
 
 ## Installation
 
@@ -19,8 +20,6 @@ This app works on Node server and uses the Mongo DB database. For the purpose of
 - [Testing User and friends route](https://youtu.be/EvW9vx47Y_c)
 
 <img src="./asset/images/Screenshot 2023-08-17 at 10.57.03 PM.png">
-
-## Usage
 
 ## Credits
 
